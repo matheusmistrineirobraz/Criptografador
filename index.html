@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bang Criptografer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="card">
+
+            <div class="cabecalho">
+                <h1>Bang Criptografe</h1>
+
+                <p>
+                    Criptografe e descriptografe textos.
+                </p>
+            </div>
+
+
+            <!-- TEXTO -->
+            <div class="campo">
+
+                <label for="texto">
+                    Texto
+                </label>
+
+                <textarea
+                    id="texto"
+                    placeholder="Digite o texto ou cole um conteúdo criptografado..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SENHA -->
+            <div class="campo">
+
+                <label for="senha">
+                    Senha
+                </label>
+
+                <div class="senha-container">
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite uma senha forte"
+                        autocomplete="new-password"
+                    >
+
+                    <button
+                        type="button"
+                        id="mostrarSenha"
+                        class="btn-secundario"
+                    >
+                        Mostrar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÕES -->
+            <div class="botoes">
+
+                <button
+                    type="button"
+                    id="criptografar"
+                    class="btn-principal"
+                >
+                    Criptografar
+                </button>
+
+
+                <button
+                    type="button"
+                    id="descriptografar"
+                    class="btn-secundario"
+                >
+                    Descriptografar
+                </button>
+
+            </div>
+
+
+            <!-- RESULTADO -->
+            <div class="campo">
+
+                <div class="resultado-titulo">
+
+                    <label for="resultado">
+                        Resultado
+                    </label>
+
+                    <button
+                        type="button"
+                        id="copiar"
+                        class="btn-copiar"
+                    >
+                        Copiar
+                    </button>
+
+                </div>
+
+
+                <textarea
+                    id="resultado"
+                    readonly
+                    placeholder="O resultado aparecerá aqui..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- MENSAGENS -->
+            <div
+                id="mensagem"
+                class="mensagem"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="javascript.js"></script>
+
+</body>
+
+</html>
