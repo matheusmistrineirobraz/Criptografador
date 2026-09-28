@@ -1,3 +1,8 @@
+import {
+    createPdfToolkit,
+    PdfPasswordError
+} from "https://cdn.jsdelivr.net/npm/pdfstudio@0.4.0/+esm";
+
 const campoTexto =
     document.getElementById("texto");
 
@@ -624,4 +629,368 @@ botaoCopiar.addEventListener(
 botaoMostrarSenha.addEventListener(
     "click",
     alternarSenha
+);
+
+/*
+|--------------------------------------------------------------------------
+| REMOVER SENHA DE PDF
+|--------------------------------------------------------------------------
+*/
+
+const campoPdf =
+    document.getElementById("pdfArquivo");
+
+
+const campoSenhaPdf =
+    document.getElementById("pdfSenha");
+
+
+const botaoRemoverSenhaPdf =
+    document.getElementById("removerSenhaPdf");
+
+
+const botaoMostrarSenhaPdf =
+    document.getElementById("mostrarSenhaPdf");
+
+
+const mensagemPdf =
+    document.getElementById("mensagemPdf");
+
+
+let pdfToolkit = null;
+
+
+/*
+|--------------------------------------------------------------------------
+| CARREGAR MOTOR PDF
+|--------------------------------------------------------------------------
+*/
+
+async function carregarPdfToolkit() {
+
+    if (pdfToolkit) {
+
+        return pdfToolkit;
+
+    }
+
+
+    pdfToolkit =
+        await createPdfToolkit();
+
+
+    return pdfToolkit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MOSTRAR / ESCONDER SENHA PDF
+|--------------------------------------------------------------------------
+*/
+
+function alternarSenhaPdf() {
+
+    if (
+        campoSenhaPdf.type === "password"
+    ) {
+
+        campoSenhaPdf.type =
+            "text";
+
+        botaoMostrarSenhaPdf.textContent =
+            "Ocultar";
+
+    }
+    else {
+
+        campoSenhaPdf.type =
+            "password";
+
+        botaoMostrarSenhaPdf.textContent =
+            "Mostrar";
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MENSAGENS PDF
+|--------------------------------------------------------------------------
+*/
+
+function mostrarErroPdf(texto) {
+
+    mensagemPdf.textContent =
+        texto;
+
+    mensagemPdf.className =
+        "mensagem erro";
+
+}
+
+
+function mostrarSucessoPdf(texto) {
+
+    mensagemPdf.textContent =
+        texto;
+
+    mensagemPdf.className =
+        "mensagem sucesso";
+
+}
+
+
+function limparMensagemPdf() {
+
+    mensagemPdf.textContent =
+        "";
+
+    mensagemPdf.className =
+        "mensagem";
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| REMOVER SENHA
+|--------------------------------------------------------------------------
+*/
+
+async function removerSenhaPdf() {
+
+    limparMensagemPdf();
+
+
+    const arquivo =
+        campoPdf.files[0];
+
+
+    const senha =
+        campoSenhaPdf.value;
+
+
+    if (!arquivo) {
+
+        mostrarErroPdf(
+            "Selecione um arquivo PDF."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        arquivo.type !== "application/pdf" &&
+        !arquivo.name.toLowerCase().endsWith(".pdf")
+    ) {
+
+        mostrarErroPdf(
+            "O arquivo selecionado precisa ser um PDF."
+        );
+
+        return;
+
+    }
+
+
+    if (senha === "") {
+
+        mostrarErroPdf(
+            "Digite a senha atual do PDF."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        botaoRemoverSenhaPdf.disabled =
+            true;
+
+        botaoRemoverSenhaPdf.textContent =
+            "Processando...";
+
+
+        mostrarSucessoPdf(
+            "Processando o PDF..."
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Inicializa o QPDF WebAssembly.
+        |--------------------------------------------------------------------------
+        */
+
+        const pdf =
+            await carregarPdfToolkit();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Remove a criptografia utilizando a senha informada.
+        |--------------------------------------------------------------------------
+        */
+
+        const pdfSemSenha =
+            await pdf.unlock(
+                arquivo,
+                {
+                    password: senha
+                }
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Criar arquivo para download
+        |--------------------------------------------------------------------------
+        */
+
+        const blob =
+            new Blob(
+                [pdfSemSenha],
+                {
+                    type: "application/pdf"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Nome do arquivo
+        |--------------------------------------------------------------------------
+        */
+
+        const nomeOriginal =
+            arquivo.name.replace(
+                /\.pdf$/i,
+                ""
+            );
+
+
+        const nomeNovo =
+            nomeOriginal +
+            "_sem_senha.pdf";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Criar download
+        |--------------------------------------------------------------------------
+        */
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            nomeNovo;
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Liberar memória
+        |--------------------------------------------------------------------------
+        */
+
+        setTimeout(
+            () => {
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+            1000
+        );
+
+
+        mostrarSucessoPdf(
+            "Senha removida. O PDF sem proteção foi gerado."
+        );
+
+    }
+    catch (erro) {
+
+        console.error(
+            erro
+        );
+
+
+        if (
+            erro instanceof PdfPasswordError
+        ) {
+
+            mostrarErroPdf(
+                "Senha incorreta. Verifique a senha do PDF."
+            );
+
+        }
+        else {
+
+            mostrarErroPdf(
+                "Não foi possível processar o PDF. Verifique se o arquivo está protegido corretamente."
+            );
+
+        }
+
+    }
+    finally {
+
+        botaoRemoverSenhaPdf.disabled =
+            false;
+
+        botaoRemoverSenhaPdf.textContent =
+            "Remover senha";
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| EVENTOS PDF
+|--------------------------------------------------------------------------
+*/
+
+botaoRemoverSenhaPdf.addEventListener(
+    "click",
+    removerSenhaPdf
+);
+
+
+botaoMostrarSenhaPdf.addEventListener(
+    "click",
+    alternarSenhaPdf
 );

@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bang Criptografer</title>
 
@@ -36,10 +33,7 @@
                     Texto
                 </label>
 
-                <textarea
-                    id="texto"
-                    placeholder="Digite o texto ou cole um conteúdo criptografado..."
-                ></textarea>
+                <textarea id="texto" placeholder="Digite o texto ou cole um conteúdo criptografado..."></textarea>
 
             </div>
 
@@ -53,18 +47,9 @@
 
                 <div class="senha-container">
 
-                    <input
-                        type="password"
-                        id="senha"
-                        placeholder="Digite uma senha forte"
-                        autocomplete="new-password"
-                    >
+                    <input type="password" id="senha" placeholder="Digite uma senha forte" autocomplete="new-password">
 
-                    <button
-                        type="button"
-                        id="mostrarSenha"
-                        class="btn-secundario"
-                    >
+                    <button type="button" id="mostrarSenha" class="btn-secundario">
                         Mostrar
                     </button>
 
@@ -76,20 +61,12 @@
             <!-- BOTÕES -->
             <div class="botoes">
 
-                <button
-                    type="button"
-                    id="criptografar"
-                    class="btn-principal"
-                >
+                <button type="button" id="criptografar" class="btn-principal">
                     Criptografar
                 </button>
 
 
-                <button
-                    type="button"
-                    id="descriptografar"
-                    class="btn-secundario"
-                >
+                <button type="button" id="descriptografar" class="btn-secundario">
                     Descriptografar
                 </button>
 
@@ -105,38 +82,76 @@
                         Resultado
                     </label>
 
-                    <button
-                        type="button"
-                        id="copiar"
-                        class="btn-copiar"
-                    >
+                    <button type="button" id="copiar" class="btn-copiar">
                         Copiar
                     </button>
 
                 </div>
 
 
-                <textarea
-                    id="resultado"
-                    readonly
-                    placeholder="O resultado aparecerá aqui..."
-                ></textarea>
+                <textarea id="resultado" readonly placeholder="O resultado aparecerá aqui..."></textarea>
 
             </div>
 
 
             <!-- MENSAGENS -->
-            <div
-                id="mensagem"
-                class="mensagem"
-            ></div>
+            <div id="mensagem" class="mensagem"></div>
+
+            <hr class="separador">
+
+            <div class="cabecalho cabecalho-pdf">
+                <h2>Remover senha de PDF</h2>
+
+                <p>
+                    Selecione um PDF protegido, informe a senha atual
+                    e gere uma cópia sem proteção.
+                </p>
+            </div>
+
+            <div class="campo">
+
+                <label for="pdfArquivo">
+                    Arquivo PDF
+                </label>
+
+                <input type="file" id="pdfArquivo" accept="application/pdf,.pdf">
+
+            </div>
+
+            <div class="campo">
+
+                <label for="pdfSenha">
+                    Senha atual do PDF
+                </label>
+
+                <div class="senha-container">
+
+                    <input type="password" id="pdfSenha" placeholder="Digite a senha do PDF" autocomplete="off">
+
+                    <button type="button" id="mostrarSenhaPdf" class="btn-secundario">
+                        Mostrar
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="botoes-pdf">
+
+                <button type="button" id="removerSenhaPdf" class="btn-principal">
+                    Remover senha
+                </button>
+
+            </div>
+
+            <div id="mensagemPdf" class="mensagem"></div>
 
         </section>
 
     </main>
 
 
-    <script src="javascript.js"></script>
+    <script type="module" src="javascript.js"></script>
 
 </body>
 
