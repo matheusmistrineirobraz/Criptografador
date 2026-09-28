@@ -1,152 +1,309 @@
+```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bang Criptografer</title>
 
+    <!-- GlassKit -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@jungherz-de/glasskit@1.15/glasskit.min.css"
+    >
+
+    <!-- Estilos próprios -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="container">
+    <main class="glass-bg">
 
-        <section class="card">
+        <!-- Elementos decorativos do fundo -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
 
-            <div class="cabecalho">
-                <h1>Bang Criptografe</h1>
+        <div class="app-container">
 
-                <p>
-                    Criptografe e descriptografe textos.
-                </p>
-            </div>
+            <!-- CABEÇALHO -->
+            <header class="app-header">
+
+                <div class="brand-mark">
+                    B
+                </div>
+
+                <div>
+                    <span class="brand-kicker">
+                        BANG / SECURITY
+                    </span>
+
+                    <h1 class="glass-title">
+                        Criptografer
+                    </h1>
+
+                    <p>
+                        Criptografe e descriptografe seus textos
+                        com uma interface simples e segura.
+                    </p>
+                </div>
+
+            </header>
 
 
-            <!-- TEXTO -->
-            <div class="campo">
+            <!-- CARD PRINCIPAL -->
+            <section class="glass-card glass-card--glow main-card">
 
-                <label for="texto">
-                    Texto
-                </label>
+                <!-- TEXTO -->
+                <div class="glass-input-group">
 
-                <textarea id="texto" placeholder="Digite o texto ou cole um conteúdo criptografado..."></textarea>
+                    <label class="glass-label" for="texto">
+                        Texto
+                    </label>
 
-            </div>
+                    <textarea
+                        id="texto"
+                        class="glass-textarea text-area"
+                        placeholder="Digite o texto ou cole um conteúdo criptografado..."
+                    ></textarea>
+
+                </div>
 
 
-            <!-- SENHA -->
-            <div class="campo">
+                <!-- SENHA -->
+                <div class="glass-input-group">
 
-                <label for="senha">
-                    Senha
-                </label>
+                    <label class="glass-label" for="senha">
+                        Senha
+                    </label>
 
-                <div class="senha-container">
+                    <div class="password-row">
 
-                    <input type="password" id="senha" placeholder="Digite uma senha forte" autocomplete="new-password">
+                        <input
+                            type="password"
+                            id="senha"
+                            class="glass-input"
+                            placeholder="Digite uma senha forte"
+                            autocomplete="new-password"
+                        >
 
-                    <button type="button" id="mostrarSenha" class="btn-secundario">
-                        Mostrar
+                        <button
+                            type="button"
+                            id="mostrarSenha"
+                            class="glass-btn glass-btn--tertiary glass-btn--auto"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AÇÕES -->
+                <div class="action-grid">
+
+                    <button
+                        type="button"
+                        id="criptografar"
+                        class="glass-btn glass-btn--primary"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+                            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                        </svg>
+
+                        Criptografar
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="descriptografar"
+                        class="glass-btn glass-btn--secondary"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10V7a5 5 0 0 1 9.9-1"></path>
+                            <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+                            <path d="M12 14v3"></path>
+                        </svg>
+
+                        Descriptografar
                     </button>
 
                 </div>
 
-            </div>
+
+                <!-- DIVISOR -->
+                <hr class="glass-divider">
 
 
-            <!-- BOTÕES -->
-            <div class="botoes">
+                <!-- RESULTADO -->
+                <div class="result-header">
 
-                <button type="button" id="criptografar" class="btn-principal">
-                    Criptografar
-                </button>
+                    <div>
+                        <label class="glass-label" for="resultado">
+                            Resultado
+                        </label>
 
+                        <span class="result-status">
+                            OUTPUT
+                        </span>
+                    </div>
 
-                <button type="button" id="descriptografar" class="btn-secundario">
-                    Descriptografar
-                </button>
-
-            </div>
-
-
-            <!-- RESULTADO -->
-            <div class="campo">
-
-                <div class="resultado-titulo">
-
-                    <label for="resultado">
-                        Resultado
-                    </label>
-
-                    <button type="button" id="copiar" class="btn-copiar">
+                    <button
+                        type="button"
+                        id="copiar"
+                        class="glass-btn glass-btn--tertiary glass-btn--sm glass-btn--auto"
+                    >
                         Copiar
                     </button>
 
                 </div>
 
 
-                <textarea id="resultado" readonly placeholder="O resultado aparecerá aqui..."></textarea>
+                <textarea
+                    id="resultado"
+                    class="glass-textarea result-area"
+                    readonly
+                    placeholder="O resultado aparecerá aqui..."
+                ></textarea>
 
-            </div>
+
+                <!-- MENSAGEM -->
+                <div
+                    id="mensagem"
+                    class="mensagem"
+                    role="status"
+                    aria-live="polite"
+                ></div>
 
 
-            <!-- MENSAGENS -->
-            <div id="mensagem" class="mensagem"></div>
+                <!-- ======================================
+                     PDF
+                ======================================= -->
 
-            <hr class="separador">
+                <div class="section-heading">
 
-            <div class="cabecalho cabecalho-pdf">
-                <h2>Remover senha de PDF</h2>
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 2h9l4 4v16H6z"></path>
+                            <path d="M14 2v5h5"></path>
+                            <path d="M9 13h6"></path>
+                            <path d="M9 17h4"></path>
+                        </svg>
+                    </div>
 
-                <p>
-                    Selecione um PDF protegido, informe a senha atual
-                    e gere uma cópia sem proteção.
-                </p>
-            </div>
+                    <div>
+                        <span class="brand-kicker">
+                            DOCUMENT / PDF
+                        </span>
 
-            <div class="campo">
+                        <h2>
+                            Remover senha de PDF
+                        </h2>
 
-                <label for="pdfArquivo">
-                    Arquivo PDF
-                </label>
-
-                <input type="file" id="pdfArquivo" accept="application/pdf,.pdf">
-
-            </div>
-
-            <div class="campo">
-
-                <label for="pdfSenha">
-                    Senha atual do PDF
-                </label>
-
-                <div class="senha-container">
-
-                    <input type="password" id="pdfSenha" placeholder="Digite a senha do PDF" autocomplete="off">
-
-                    <button type="button" id="mostrarSenhaPdf" class="btn-secundario">
-                        Mostrar
-                    </button>
+                        <p>
+                            Informe a senha atual para gerar uma
+                            cópia do documento sem proteção.
+                        </p>
+                    </div>
 
                 </div>
 
-            </div>
 
-            <div class="botoes-pdf">
+                <!-- ARQUIVO -->
+                <div class="glass-input-group">
 
-                <button type="button" id="removerSenhaPdf" class="btn-principal">
+                    <label class="glass-label" for="pdfArquivo">
+                        Arquivo PDF
+                    </label>
+
+                    <input
+                        type="file"
+                        id="pdfArquivo"
+                        class="glass-input file-input"
+                        accept="application/pdf,.pdf"
+                    >
+
+                </div>
+
+
+                <!-- SENHA PDF -->
+                <div class="glass-input-group">
+
+                    <label class="glass-label" for="pdfSenha">
+                        Senha atual do PDF
+                    </label>
+
+                    <div class="password-row">
+
+                        <input
+                            type="password"
+                            id="pdfSenha"
+                            class="glass-input"
+                            placeholder="Digite a senha do PDF"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            id="mostrarSenhaPdf"
+                            class="glass-btn glass-btn--tertiary glass-btn--auto"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÃO PDF -->
+                <button
+                    type="button"
+                    id="removerSenhaPdf"
+                    class="glass-btn glass-btn--primary"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3v12"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                        <path d="M5 21h14"></path>
+                    </svg>
+
                     Remover senha
                 </button>
 
-            </div>
 
-            <div id="mensagemPdf" class="mensagem"></div>
+                <div
+                    id="mensagemPdf"
+                    class="mensagem"
+                    role="status"
+                    aria-live="polite"
+                ></div>
 
-        </section>
+            </section>
+
+
+            <!-- RODAPÉ -->
+            <footer class="app-footer">
+
+                <span>
+                    BANG CRYPTOGRAFER
+                </span>
+
+                <span class="footer-dot"></span>
+
+                <span>
+                    LOCAL PROCESSING
+                </span>
+
+            </footer>
+
+        </div>
 
     </main>
 
@@ -156,3 +313,4 @@
 </body>
 
 </html>
+```

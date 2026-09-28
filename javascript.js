@@ -823,15 +823,7 @@ async function removerSenhaPdf() {
             "Processando o PDF..."
         );
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Inicializa o QPDF WebAssembly.
-        |--------------------------------------------------------------------------
-        */
-
-        const pdf =
-            await carregarPdfToolkit();
+        const pdf = await carregarPdfToolkit();
 
 
         /*
@@ -864,8 +856,7 @@ async function removerSenhaPdf() {
             );
 
 
-        const url =
-            URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob);
 
 
         /*
@@ -881,9 +872,7 @@ async function removerSenhaPdf() {
             );
 
 
-        const nomeNovo =
-            nomeOriginal +
-            "_sem_senha.pdf";
+        const nomeNovo = nomeOriginal + "_sem_senha.pdf";
 
 
         /*
@@ -898,12 +887,10 @@ async function removerSenhaPdf() {
             );
 
 
-        link.href =
-            url;
+        link.href = url;
 
 
-        link.download =
-            nomeNovo;
+        link.download = nomeNovo;
 
 
         document.body.appendChild(
