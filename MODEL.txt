@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math SetupUtilities | PDF Utilities</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="glass-bg">
+    <div class="app-container">
+      <header class="app-header">
+        <span class="brand-kicker">MATH SETUPUTILITIES</span>
+        <h1>PDF Utilities</h1>
+        <p>Ferramentas simples para seus documentos, com processamento local.</p>
+      </header>
+
+      <section class="main-card" aria-labelledby="pdf-title">
+        <div class="section-heading">
+          <div class="section-icon">PDF</div>
+          <div>
+            <span class="brand-kicker">DOCUMENT / PDF</span>
+            <h2 id="pdf-title">Remover senha de PDF</h2>
+            <p>Informe a senha atual para gerar uma cópia do documento sem proteção.</p>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="pdfArquivo">Arquivo PDF</label>
+          <input id="pdfArquivo" class="input file-input" type="file" accept="application/pdf,.pdf">
+          <span id="fileName" class="file-name"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="pdfSenha">Senha atual do PDF</label>
+          <div class="password-row">
+            <input id="pdfSenha" class="input" type="password" placeholder="Digite a senha do PDF" autocomplete="off">
+            <button id="togglePassword" class="button secondary" type="button">Mostrar</button>
+          </div>
+        </div>
+
+        <button id="removePassword" class="button primary" type="button">
+          <span>↓</span> Remover senha
+        </button>
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+      </section>
+
+      <footer class="app-footer">
+        <span>BANG CRYPTOGRAFER</span><i></i><span>LOCAL PROCESSING</span>
+      </footer>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
